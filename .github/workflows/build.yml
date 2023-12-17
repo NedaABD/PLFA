@@ -1,0 +1,18 @@
+name: minimal
+on:
+  push:
+    branches: ['main']
+jobs:
+  check:
+    name: agda binary typechecks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.3'  # https://plfa.github.io/GettingStarted/#install-agda
+          agda-stdlib-version: 'recommended'
+
+      - run: agda typechecks.agda
+        working-directory: tests
